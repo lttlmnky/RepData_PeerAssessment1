@@ -12,7 +12,7 @@ library(timeDate)
 library(plyr)
 library(dplyr)
 library(data.table)
-library(ggplot2)
+library(lattice)
 ```
 ## Loading and preprocessing the data
 *Read file*
@@ -130,9 +130,21 @@ new_steps_sum_median - steps_sum_median
 
 ## Are there differences in activity patterns between weekdays and weekends?
 ```{r}
-new_data$date <- as.Date(new_data$date)
-MonToFri <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
-new_data$weekDay <- factor((weekdays(new_data$date) %in% MonToFri), levels=c(FALSE, TRUE), labels=c('weekend', 'weekday')) 
-avgStepInterval <- aggregate(steps ~ interval+weekDay, new_data, mean)
-ggplot(avgStepInterval, aes(x=interval, y=steps, color=weekDay))+ geom_line() + facet_wrap(~weekDay, ncol=1, nrow=2)
+
+new_data$day <- weekdays(as.Date(new_data$date))
+new_data$day[new_data$day %in% c("Saturday", "Sunday")] <- "Weekend"
+new_data$day[new_data$day != "Weekend"] <- "Weekday"
+new_data$day <- as.factor(new_data$day)
+
+aggre_steps <- aggregate(steps ~ interval + day, data = new_data, mean)
+aggre_steps$interval <- as.integer(aggre_steps$interval)
+
+xyplot(steps ~ interval | factor(day), 
+       data = aggre_steps, 
+       layout=c(1,2), 
+       type = "l", 
+       xlab = "Time Interval",
+       ylab = "Average Steps",
+       main = "Average steps by interval and weekday or weekend"
+      )
 ```
