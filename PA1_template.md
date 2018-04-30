@@ -20,7 +20,7 @@ install.packages("timeDate", repos = "http://cran.us.r-project.org")
 ## package 'timeDate' successfully unpacked and MD5 sums checked
 ## 
 ## The downloaded binary packages are in
-## 	C:\Users\hourui\AppData\Local\Temp\Rtmp4A0nmb\downloaded_packages
+## 	C:\Users\hourui\AppData\Local\Temp\Rtmp0abICy\downloaded_packages
 ```
 
 ```r
@@ -123,7 +123,9 @@ hist(steps_sum$day_sum, breaks = 10, col = "green", main="Histogram of Total Ste
 steps_sum_mean
 ```
 
-[1] 9354.23
+```
+## [1] 9354.23
+```
 
 ### Median of total steps per day
 
@@ -131,7 +133,9 @@ steps_sum_mean
 steps_sum_median
 ```
 
-[1] 10395
+```
+## [1] 10395
+```
 
 ## What is the average daily activity pattern?
 ### plot of steps taken by intervals
@@ -151,7 +155,9 @@ step_interval_max <- steps_by_interval[which.max(steps_by_interval$interval_mean
 step_interval_max$interval
 ```
 
-[1] 835
+```
+## [1] 835
+```
 
 ## Imputing missing values
 *Total number of rows with NAs*
@@ -160,7 +166,9 @@ step_interval_max$interval
 sum(is.na(data$steps))
 ```
 
-[1] 2304
+```
+## [1] 2304
+```
 
 *Create subset Data Frame for NA rows*
 
@@ -213,7 +221,9 @@ new_steps_sum_mean <- mean(new_steps_sum$new_day_sum)
 new_steps_sum_mean
 ```
 
-[1] 10821.21
+```
+## [1] 10821.21
+```
 _Median_
 
 ```r
@@ -221,7 +231,9 @@ new_steps_sum_median <- median(new_steps_sum$new_day_sum)
 new_steps_sum_median
 ```
 
-[1] 11015
+```
+## [1] 11015
+```
 
 *Differences from before adn after imputing values mean and median increased*
 _Mean steps per day difference_
@@ -230,14 +242,18 @@ _Mean steps per day difference_
 new_steps_sum_mean - steps_sum_mean
 ```
 
-[1] 1466.98
+```
+## [1] 1466.98
+```
 _Median steps per day difference_
 
 ```r
 new_steps_sum_median - steps_sum_median
 ```
 
-[1] 620
+```
+## [1] 620
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
